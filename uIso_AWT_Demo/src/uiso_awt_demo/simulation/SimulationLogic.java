@@ -36,9 +36,12 @@ import uiso_awt_demo.drawer.JavaSEDrawer;
 import uiso_awt_demo.gui.DebugInformationPanel;
 import uiso_awt_demo.map.MyTile;
 import uiso_awt_demo.object.Minotaur;
+import uiso_awt_demo.object.CastleBuilder;
 import uiso_awt_demo.object.MySpriteObject;
 import uiso_awt_demo.object.PathFinder;
 import uiso_awt_demo.object.TerraformIcon;
+import uiso_awt_demo.object.Wall;
+import uiso_awt_demo.object.Wall.WallType;
 import uiso_awt_demo.simulation.SimulationCoordinator.ScrollToVirtualCoordinatesEvent;
 import uiso_awt_demo.simulation.SimulationCoordinator.ScrollViewportCenterWithRealCoordinatesDeltaEvent;
 import uiso_awt_demo.util.TerraformUtils;
@@ -231,12 +234,20 @@ class SimulationLogic implements ISimulationLogic {
 						this.updateTerraformIconPosition(uiso_engine, drawer);
 
 					} else if (SimulationConstants.CASTLE_LAND_AREA.contains(tile_x, tile_y)) {
+						if(left_click){
+							//build wall
+							char c = '+';
+							MyTile tile = (MyTile) uiso_engine.getTile(tile_x, tile_y);
+					this.simulation_state.castle_builder.createWalls(tile_x,tile_y,c,uiso_engine,tile);	
+					
+					//this.simulation_state.castle_builder.build(uiso_engine);
+						}else
 						if (this.tile_under_mouse_pointer.getSlope() == Tile.FLAT && uiso_engine.getTileZ(this.tile_under_mouse_pointer) == 0
 								&& (this.simulation_state.minotaur.getTileX() != tile_x || this.simulation_state.minotaur.getTileY() != tile_y)) {
-
+									//move minotaur
 							this.simulation_state.minotaur.setPathToBeTraversed(PathFinder.findPathTo(uiso_engine, (MyTile) uiso_engine.getTile(this.simulation_state.minotaur
 									.getTileX(), this.simulation_state.minotaur.getTileY()), (MyTile) uiso_engine.getTile(tile_x, tile_y)), uiso_engine);
-						}
+						} 
 					}
 				break;
 			}

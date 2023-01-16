@@ -40,6 +40,7 @@ class SimulationState {
 	public SimulationState(UIsoEngine uiso_engine) {
 
 		/* Random generates scenario tile heights. */
+		if(false == true){
 		for (int y = SimulationConstants.EDITABLE_AREA.y; y <= SimulationConstants.EDITABLE_AREA.y + SimulationConstants.EDITABLE_AREA.height; y += 4) {
 			for (int x = SimulationConstants.EDITABLE_AREA.x; x <= SimulationConstants.EDITABLE_AREA.y + SimulationConstants.EDITABLE_AREA.width; x += 4) {
 				int z = this.random.nextInt(SimulationConstants.UISO_CONFIGURATION.tile_max_z + 1);
@@ -102,6 +103,7 @@ class SimulationState {
 				tiles.clear();
 			}
 		}
+	}
 
 		StringObject string_object = new StringObject();
 		string_object.setString("Editable area\nUse left and right mouse buttons to change terrain height");
@@ -116,13 +118,14 @@ class SimulationState {
 		castle_builder.build(uiso_engine);
 		MyTile minotaur_initial_tile = castle_builder.getEspecialTilesMap().get('M');
 
+		this.castle_builder = castle_builder;
 		this.minotaur = new Minotaur();
 		this.minotaur.setX(uiso_engine.getTileX(minotaur_initial_tile) * SimulationConstants.TILE_VIRTUAL_SIZE + Minotaur.TILE_OFFSET_X);
 		this.minotaur.setY(uiso_engine.getTileY(minotaur_initial_tile) * SimulationConstants.TILE_VIRTUAL_SIZE + Minotaur.TILE_OFFSET_Y);
 		uiso_engine.insertObject(this.minotaur);
 
 		MyTile castle_entrance_tile = castle_builder.getEspecialTilesMap().get('E');
-		this.castle_entrance = new AnimatedString("Castle Entrance");
+		this.castle_entrance = new AnimatedString("front door");
 		this.castle_entrance.setFont(SimulationConstants.ANIMATED_TEXT_FONT);
 		this.castle_entrance.setColor(SimulationConstants.ANIMATED_TEXT_COLOR);
 		this.castle_entrance.setX(uiso_engine.getTileX(castle_entrance_tile) * SimulationConstants.TILE_VIRTUAL_SIZE);
@@ -134,6 +137,7 @@ class SimulationState {
 
 	public AnimatedString castle_entrance;
 	public Minotaur minotaur;
+	public CastleBuilder castle_builder;
 	public Random random = new Random();
 	public int tick;
 }

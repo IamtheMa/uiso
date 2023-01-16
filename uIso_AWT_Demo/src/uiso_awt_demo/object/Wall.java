@@ -94,6 +94,8 @@ public class Wall extends MySpriteObject<Wall.WallType> {
 
 	public static Map<Integer, Sprite> createSprites() {
 		Map<Integer, Sprite> sprites = Common.createSpritesFromImage("wall.png", 64, 157, Arrays.asList(WallType.values()), 1);
+		
+		System.out.println("create sprites");
 		return sprites;
 	}
 

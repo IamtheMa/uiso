@@ -31,7 +31,8 @@ public abstract class MySpriteObject<E extends Enum<E>> extends SpriteObject imp
 	public static Map<ObjectType, Map<Integer, Sprite>> sprites = new HashMap<ObjectType, Map<Integer, Sprite>>();
 
 	public static void init() {
-		sprites.put(ObjectType.WALL, Wall.createSprites());
+		sprites.put(ObjectType.WALL, Wall.createSprites());		
+		System.out.println("sprites.put wall");
 		sprites.put(ObjectType.TERRAFORM_ICON, TerraformIcon.createSprites());
 		sprites.put(ObjectType.MINOTAUR, Minotaur.createSprites());
 	}

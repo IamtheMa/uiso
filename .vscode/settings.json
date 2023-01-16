@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": [
+        "uIso_AWT_Demo/src",
+        "uIso_AWT_Demo/res",
+        "uIso/src",
+        "uIso_AWT_Demo"
+    ]
+}

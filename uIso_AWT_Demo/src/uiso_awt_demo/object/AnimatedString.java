@@ -43,7 +43,7 @@ public class AnimatedString extends StringObject implements AnimatedObject {
 			this.padding_size = this.padding_size % 21;
 		}
 
-		if (changed) {
+		if (changed) { 
 			char buffer[] = new char[this.padding_size * 2 + 2 + this.content.length];
 			int i = 0;
 

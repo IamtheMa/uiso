@@ -36,6 +36,7 @@ public class Common {
 		List<Sprite> sprites;
 		int sprite_count = enums.size() * sprites_per_direction;
 
+		System.out.println("create sprites");
 		sprites = simpleSpriteLoader.createSpritesFromImage(path, w, h, sprite_count);
 
 		int ordinal = 0, s = 0;

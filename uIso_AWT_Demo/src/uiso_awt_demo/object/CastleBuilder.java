@@ -80,6 +80,7 @@ public class CastleBuilder {
 		}
 
 		this.especial_positions = Collections.unmodifiableMap(this.especial_positions);
+		System.out.println("built");
 	}
 
 	public Map<Character, MyTile> getEspecialTilesMap() {
@@ -92,28 +93,36 @@ public class CastleBuilder {
 	private String[] blue_prints;
 	private Map<Character, MyTile> especial_positions = new HashMap<Character, MyTile>();
 
-	private void createWall(int x, int y, WallType wall_type, UIsoEngine uiso_engine) {
+	public void createWall(int x, int y, WallType wall_type, UIsoEngine uiso_engine) {
 		Wall wall = new Wall();
 
 		wall.setX((x + this.base_x) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetX());
 		wall.setY((y + this.base_y) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetY());
 		wall.setEnum(wall_type);
 		uiso_engine.insertObject(wall);
+		
+		//wall.createSprites();
+		System.out.println("make wall? " + wall_type);
 	}
 
-	private void createWalls(int x, int y, char c, UIsoEngine uiso_engine, MyTile tile) {
+	public void createWalls(int x, int y, char c, UIsoEngine uiso_engine, MyTile tile) {
+		System.out.println("c " + c + " " + x + "," + y);
 		switch (c) {
-			case 'G':
+			case 'G': 
 				if (this.safeGetChar(x + 1, y) != ' ' && this.safeGetChar(x - 1, y) != ' ') {
 					if (this.safeGetChar(x + 1, y) == 'G') {
+						System.out.println("x gate after");
 						this.createWall(x, y, WallType.X_GATE_AFTER, uiso_engine);
 					} else {
+						System.out.println("x gate before");
 						this.createWall(x, y, WallType.X_GATE_BEFORE, uiso_engine);
 					}
 				} else {
 					if (this.safeGetChar(x, y + 1) == 'G') {
+						System.out.println("y gate after");
 						this.createWall(x, y, WallType.Y_GATE_AFTER, uiso_engine);
 					} else {
+						System.out.println("y gate before");
 						this.createWall(x, y, WallType.Y_GATE_BEFORE, uiso_engine);
 					}
 				}
@@ -121,14 +130,17 @@ public class CastleBuilder {
 			case '+':
 				this.createWall(x, y, WallType.CROSS, uiso_engine);
 				tile.setPassability(false);
+				System.out.println("cross");
 			break;
 			case '|':
 				this.createWall(x, y, WallType.X, uiso_engine);
 				tile.setPassability(false);
+				System.out.println("x");
 			break;
 			case '-':
 				this.createWall(x, y, WallType.Y, uiso_engine);
 				tile.setPassability(false);
+				System.out.println("y");
 			break;
 			default:
 				if (c != 'O' && Character.isLetter(c)) {
@@ -140,6 +152,7 @@ public class CastleBuilder {
 		if (c != 'O') {
 			TerraformUtils.setAllTileCornersZ(0, uiso_engine, tile);
 			this.adjustTile(x, y, c, uiso_engine, tile);
+			System.out.println("adjust");
 		}
 	}
 

@@ -782,7 +782,7 @@ public class UIsoEngine {
 		*/
 	}
 
-	private void drawObjects() {
+	public void drawObjects() {
 		int min_x, min_y, max_x, max_y;
 		UIsoObjectsGridCell objects_grid_cell;
 

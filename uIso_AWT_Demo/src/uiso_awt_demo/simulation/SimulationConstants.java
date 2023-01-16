@@ -25,6 +25,8 @@ import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +95,7 @@ public class SimulationConstants {
 		BufferedReader bufferedReader = null;
 		try {
 			try {
-				bufferedReader = new BufferedReader(new InputStreamReader(SimulationConstants.class.getClassLoader().getResourceAsStream("castle_blueprint.txt")));
+				bufferedReader = new BufferedReader(new InputStreamReader(SimulationConstants.class.getResourceAsStream("/castle_blueprint.txt")));
 				List<String> lines = new ArrayList<String>();
 				String line;
 				while (null != (line = bufferedReader.readLine())) {
