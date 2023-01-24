@@ -30,7 +30,7 @@ OOOOOOOOOOOOOOO|                +---------+      +---------+              |OOOOO
 +--------------+                |OOOOOOOOO|      |OOOOOOOOO|              +---------------+
 |              |                |OOOOOOOOO+      +OOOOOOOOO|              |               |
 |              |                |OOOOOOOO+        +OOOOOOOO|              |               |
-|              G                |OOOOOOO+   E      +OOOOOOO|              G               |
+|              G                |OOOOOOO+          +OOOOOOO|              G               |
 |              G                |OOOOOO+-----GG-----+OOOOOO|              G               |
 |              |                |OOOOOOOOOOOOO OOOOOOOOOOOO|              |               |
 |              |                |OOOOOOOOOOOOO OOOOOOOOOOOO|              |               |

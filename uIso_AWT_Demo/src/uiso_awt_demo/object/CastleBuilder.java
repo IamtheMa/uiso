@@ -95,14 +95,14 @@ public class CastleBuilder {
 
 	public void createWall(int x, int y, WallType wall_type, UIsoEngine uiso_engine) {
 		Wall wall = new Wall();
-
-		wall.setX((x + this.base_x) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetX());
-		wall.setY((y + this.base_y) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetY());
+		
+		wall.setX((x) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetX());
+		wall.setY((y) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetY());
 		wall.setEnum(wall_type);
 		uiso_engine.insertObject(wall);
 		
 		//wall.createSprites();
-		System.out.println("make wall? " + wall_type);
+		System.out.println("make wall? " + wall_type + " : " + x + "," + y + " ; " + (x + this.base_x) + "," + (y + this.base_y));
 	}
 
 	public void createWalls(int x, int y, char c, UIsoEngine uiso_engine, MyTile tile) {
@@ -145,6 +145,7 @@ public class CastleBuilder {
 			default:
 				if (c != 'O' && Character.isLetter(c)) {
 					this.especial_positions.put(c, tile);
+					System.out.println("default");					
 				}
 			break;
 		}
@@ -159,7 +160,9 @@ public class CastleBuilder {
 	private void adjustTile(int x, int y, char c, UIsoEngine uiso_engine, MyTile tile) {
 		if (c == ' ' || c == '+') {
 			tile.setTileType(TileType.CASTLE_FLOOR_FULL);
+			System.out.println("adjust tile 1");
 		} else {
+			System.out.println("adjust tile 2");
 			boolean neighbour_on_ne = this.safeGetChar(x + 1, y) != 'O';
 			boolean neighbour_on_sw = this.safeGetChar(x - 1, y) != 'O';
 			boolean neighbour_on_nw = this.safeGetChar(x, y + 1) != 'O';

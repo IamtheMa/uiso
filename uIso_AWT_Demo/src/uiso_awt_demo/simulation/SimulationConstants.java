@@ -42,8 +42,8 @@ public class SimulationConstants {
 	public static final int UISO_ENGINE_VIEWPORT_DELTA_W = 50;
 	public static final int UISO_ENGINE_VIEWPORT_DELTA_H = 35;
 
-	public static final int MAP_W = 120;
-	public static final int MAP_H = 100;
+	public static final int MAP_W = 48;
+	public static final int MAP_H = 91;
 
 	public static final int TILE_VIRTUAL_SIZE = 16;
 	public static final int SLOPE_HEIGHT = 8;
@@ -57,7 +57,7 @@ public class SimulationConstants {
 	public static final Color INFO_TEXT_COLOR = Color.CYAN;
 	public static final Color ANIMATED_TEXT_COLOR = Color.YELLOW;
 	public static final Color FPS_TEXT_COLOR = Color.WHITE;
-	public static final Font INFO_TEXT_FONT = new Font("monospaced", Font.BOLD, 25);
+	public static final Font INFO_TEXT_FONT = new Font("ariel", Font.BOLD, 25);
 	public static final Font ANIMATED_TEXT_FONT = new Font("serif", Font.BOLD, 25);
 
 	public static final float FRAME_TIME = 1000.f / 30.f; /* mi1liseconds. */
@@ -70,9 +70,9 @@ public class SimulationConstants {
 
 	public static final UIsoConfiguration UISO_CONFIGURATION;
 
-	public static final Rectangle EDITABLE_AREA = new Rectangle(0, 0, 20, 100);
-	public static final Rectangle EMPTY_AREA = new Rectangle(20, 0, 20, 100);
-	public static final Rectangle CASTLE_LAND_AREA = new Rectangle(40, 0, 80, 100);
+	//public static final Rectangle EDITABLE_AREA = new Rectangle(0, 0, 20, 100);
+	//public static final Rectangle EMPTY_AREA = new Rectangle(20, 0, 20, 100);
+	public static final Rectangle CASTLE_LAND_AREA = new Rectangle(0, 0, 48, 91);
 
 	public final static String[] CASTLE_BLUEPRINT;
 

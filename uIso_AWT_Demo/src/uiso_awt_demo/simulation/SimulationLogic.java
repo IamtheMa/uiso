@@ -67,7 +67,7 @@ class SimulationLogic implements ISimulationLogic {
 
 		this.simulation_state.minotaur.update(uiso_engine, this.simulation_state.tick);
 
-		this.simulation_state.castle_entrance.update(uiso_engine, this.simulation_state.tick);
+		//this.simulation_state.castle_entrance.update(uiso_engine, this.simulation_state.tick);
 
 		return false;
 	}
@@ -228,18 +228,17 @@ class SimulationLogic implements ISimulationLogic {
 					int tile_x = uiso_engine.getTileX(this.tile_under_mouse_pointer);
 					int tile_y = uiso_engine.getTileY(this.tile_under_mouse_pointer);
 
-					if (SimulationConstants.EDITABLE_AREA.contains(tile_x, tile_y)) {
-						int delta = left_click ? -1 : 1;
-						TerraformUtils.setTileHeight(uiso_engine, this.tile_under_terraform_icon, uiso_engine.getTileZ(this.tile_under_terraform_icon) + delta);
-						this.updateTerraformIconPosition(uiso_engine, drawer);
-
-					} else if (SimulationConstants.CASTLE_LAND_AREA.contains(tile_x, tile_y)) {
+					//if (SimulationConstants.EDITABLE_AREA.contains(tile_x, tile_y)) {
+					//	int delta = left_click ? -1 : 1;
+					//	TerraformUtils.setTileHeight(uiso_engine, this.tile_under_terraform_icon, uiso_engine.getTileZ(this.tile_under_terraform_icon) + delta);
+					//	this.updateTerraformIconPosition(uiso_engine, drawer);
+					//} else 
+					if (SimulationConstants.CASTLE_LAND_AREA.contains(tile_x, tile_y)) {
 						if(left_click){
 							//build wall
 							char c = '+';
 							MyTile tile = (MyTile) uiso_engine.getTile(tile_x, tile_y);
 					this.simulation_state.castle_builder.createWalls(tile_x,tile_y,c,uiso_engine,tile);	
-					
 					//this.simulation_state.castle_builder.build(uiso_engine);
 						}else
 						if (this.tile_under_mouse_pointer.getSlope() == Tile.FLAT && uiso_engine.getTileZ(this.tile_under_mouse_pointer) == 0
@@ -279,10 +278,11 @@ class SimulationLogic implements ISimulationLogic {
 
 	private void updateTerraformIcon(UIsoEngine uiso_engine, JavaSEDrawer drawer) {
 		int tile_x = uiso_engine.getTileX(this.tile_under_mouse_pointer), tile_y = uiso_engine.getTileY(this.tile_under_mouse_pointer);
-		if (SimulationConstants.EDITABLE_AREA.contains(tile_x, tile_y) && uiso_engine.tile_position_relative_map_polygon == UIsoConstants.INSIDE_POLYGON) {
-			this.updateTerraformIconPosition(uiso_engine, drawer);
-			drawer.setSelectedTile(this.tile_under_mouse_pointer);
-		} else {
+		//if (SimulationConstants.EDITABLE_AREA.contains(tile_x, tile_y) && uiso_engine.tile_position_relative_map_polygon == UIsoConstants.INSIDE_POLYGON) {
+		//	this.updateTerraformIconPosition(uiso_engine, drawer);
+		//	drawer.setSelectedTile(this.tile_under_mouse_pointer);
+		//} else 
+		{
 			uiso_engine.removeObject(TerraformIcon.terraform_icon);
 			if (SimulationConstants.CASTLE_LAND_AREA.contains(tile_x, tile_y) && uiso_engine.tile_position_relative_map_polygon == UIsoConstants.INSIDE_POLYGON) {
 				drawer.setSelectedTile(this.tile_under_mouse_pointer);

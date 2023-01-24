@@ -58,6 +58,36 @@ class SceneObjectsManager {
 		this.viewport_offset_y = this.isometric_engine.viewport_offset_y;
 	}
 
+	public SpriteSceneObject[] findObjects(int x, int y) {
+		int i;
+		SpriteSceneObject sprite_scene_object;
+		SpriteSceneObject[] objects = null;
+
+		this.sortSpriteSceneObjects();
+		for (i = 0; i < this.n_sprite_scene_objects; i++) {
+			sprite_scene_object = this.sprite_scene_objects[i];
+			sprite_scene_object.sprite_object.setSelected(false);
+
+			if(sprite_scene_object.sprite_object.getX() == x && sprite_scene_object.sprite_object.getY() == y){
+				int n = objects.length;
+				SpriteSceneObject[] newObjects = new SpriteSceneObject[n + 1];
+				for (i = 0; i < n; i++){
+					newObjects[i] = objects[i];
+				}
+				newObjects[n] = this.sprite_scene_objects[i];
+				objects = newObjects;
+				if (this.debug) {
+					this.virtual_coordinates.x = sprite_scene_object.sprite_object.getX() + this.tile_max_z * this.virtual_world_tile_size;
+					this.virtual_coordinates.y = sprite_scene_object.sprite_object.getY() + this.tile_max_z * this.virtual_world_tile_size;
+					this.virtual_coordinates.z = sprite_scene_object.sprite_object.getZ();
+					UIsoEngine.toRealCoordinates(this.virtual_coordinates, this.real_coordinates);
+					this.drawer.drawString(this.real_coordinates.x - this.viewport_offset_x, this.real_coordinates.y - this.viewport_offset_y, "found");
+				}
+			}
+		}
+		return objects;
+	}
+
 	void insertObjectInScene(UIsoObject object) {
 		if (!object.isSelected() && object.isVisible()) {
 			this.virtual_coordinates.x = object.getX() + this.tile_max_z * this.virtual_world_tile_size;

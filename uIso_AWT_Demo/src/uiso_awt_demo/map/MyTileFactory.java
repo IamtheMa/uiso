@@ -32,11 +32,12 @@ public class MyTileFactory implements ITileFactory {
 
 		if (SimulationConstants.CASTLE_LAND_AREA.contains(tile_x, tile_y)) {
 			tile.setTileType(TileType.GRASS);
-		} else if (SimulationConstants.EDITABLE_AREA.contains(tile_x, tile_y)) {
-			tile.setTileType(TileType.BARE_GROUND);
-		} else if (SimulationConstants.EMPTY_AREA.contains(tile_x, tile_y)) {
-			tile.setVisibility(false);
-		}
+		} 
+		//else if (SimulationConstants.EDITABLE_AREA.contains(tile_x, tile_y)) {
+		//	tile.setTileType(TileType.BARE_GROUND);
+		//} else if (SimulationConstants.EMPTY_AREA.contains(tile_x, tile_y)) {
+		//	tile.setVisibility(false);
+		//}
 
 		return tile;
 	}

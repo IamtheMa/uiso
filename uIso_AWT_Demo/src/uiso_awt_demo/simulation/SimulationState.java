@@ -41,14 +41,14 @@ class SimulationState {
 
 		/* Random generates scenario tile heights. */
 		if(false == true){
-		for (int y = SimulationConstants.EDITABLE_AREA.y; y <= SimulationConstants.EDITABLE_AREA.y + SimulationConstants.EDITABLE_AREA.height; y += 4) {
-			for (int x = SimulationConstants.EDITABLE_AREA.x; x <= SimulationConstants.EDITABLE_AREA.y + SimulationConstants.EDITABLE_AREA.width; x += 4) {
-				int z = this.random.nextInt(SimulationConstants.UISO_CONFIGURATION.tile_max_z + 1);
-				Tile tile = uiso_engine.getTile(x, y);
-				if (uiso_engine.canSetTileZ(tile, z))
-					uiso_engine.setTileZ(tile, z);
-			}
-		}
+		//for (int y = SimulationConstants.EDITABLE_AREA.y; y <= SimulationConstants.EDITABLE_AREA.y + SimulationConstants.EDITABLE_AREA.height; y += 4) {
+		//	for (int x = SimulationConstants.EDITABLE_AREA.x; x <= SimulationConstants.EDITABLE_AREA.y + SimulationConstants.EDITABLE_AREA.width; x += 4) {
+		//		int z = this.random.nextInt(SimulationConstants.UISO_CONFIGURATION.tile_max_z + 1);
+		//		Tile tile = uiso_engine.getTile(x, y);
+		//		if (uiso_engine.canSetTileZ(tile, z))
+		//			uiso_engine.setTileZ(tile, z);
+		//	}
+		//}
 
 		/* Generate the mountains behind the castle. */
 		{
@@ -105,13 +105,13 @@ class SimulationState {
 		}
 	}
 
-		StringObject string_object = new StringObject();
-		string_object.setString("Editable area\nUse left and right mouse buttons to change terrain height");
-		string_object.setX((SimulationConstants.EDITABLE_AREA.x + SimulationConstants.EDITABLE_AREA.width) * SimulationConstants.TILE_VIRTUAL_SIZE);
-		string_object.setY((SimulationConstants.EDITABLE_AREA.y + SimulationConstants.EDITABLE_AREA.height) / 2 * SimulationConstants.TILE_VIRTUAL_SIZE);
-		string_object.setColor(SimulationConstants.INFO_TEXT_COLOR);
-		string_object.setFont(SimulationConstants.INFO_TEXT_FONT);
-		uiso_engine.insertObject(string_object);
+		//StringObject string_object = new StringObject();
+		//string_object.setString("Editable area\nUse left and right mouse buttons to change terrain height");
+		//string_object.setX((SimulationConstants.EDITABLE_AREA.x + SimulationConstants.EDITABLE_AREA.width) * SimulationConstants.TILE_VIRTUAL_SIZE);
+		//string_object.setY((SimulationConstants.EDITABLE_AREA.y + SimulationConstants.EDITABLE_AREA.height) / 2 * SimulationConstants.TILE_VIRTUAL_SIZE);
+		//string_object.setColor(SimulationConstants.INFO_TEXT_COLOR);
+		//string_object.setFont(SimulationConstants.INFO_TEXT_FONT);
+		//uiso_engine.insertObject(string_object);
 
 		CastleBuilder castle_builder =
 				new CastleBuilder(SimulationConstants.CASTLE_LAND_AREA, Alignment.LEFT_ALIGNMENT, Alignment.CENTER_ALIGNMENT, SimulationConstants.CASTLE_BLUEPRINT);
@@ -124,13 +124,13 @@ class SimulationState {
 		this.minotaur.setY(uiso_engine.getTileY(minotaur_initial_tile) * SimulationConstants.TILE_VIRTUAL_SIZE + Minotaur.TILE_OFFSET_Y);
 		uiso_engine.insertObject(this.minotaur);
 
-		MyTile castle_entrance_tile = castle_builder.getEspecialTilesMap().get('E');
-		this.castle_entrance = new AnimatedString("front door");
-		this.castle_entrance.setFont(SimulationConstants.ANIMATED_TEXT_FONT);
-		this.castle_entrance.setColor(SimulationConstants.ANIMATED_TEXT_COLOR);
-		this.castle_entrance.setX(uiso_engine.getTileX(castle_entrance_tile) * SimulationConstants.TILE_VIRTUAL_SIZE);
-		this.castle_entrance.setY(uiso_engine.getTileY(castle_entrance_tile) * SimulationConstants.TILE_VIRTUAL_SIZE);
-		uiso_engine.insertObject(this.castle_entrance);
+		//MyTile castle_entrance_tile = castle_builder.getEspecialTilesMap().get('E');
+		//this.castle_entrance = new AnimatedString("front door");
+		//this.castle_entrance.setFont(SimulationConstants.ANIMATED_TEXT_FONT);
+		//this.castle_entrance.setColor(SimulationConstants.ANIMATED_TEXT_COLOR);
+		//this.castle_entrance.setX(uiso_engine.getTileX(castle_entrance_tile) * SimulationConstants.TILE_VIRTUAL_SIZE);
+		//this.castle_entrance.setY(uiso_engine.getTileY(castle_entrance_tile) * SimulationConstants.TILE_VIRTUAL_SIZE);
+		//uiso_engine.insertObject(this.castle_entrance);
 
 		uiso_engine.scrollToTile(minotaur_initial_tile);
 	}

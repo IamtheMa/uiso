@@ -23,6 +23,7 @@ import uiso.exceptions.InvalidTileCoordinatesException;
 import uiso.interfaces.IDrawer;
 import uiso.interfaces.ISimulationLogic;
 import uiso.util.MathUtils;
+import uiso_awt_demo.object.Wall;
 
 /**
  * This is the main uIsometric Engine class. It is used to:
@@ -455,12 +456,20 @@ public class UIsoEngine {
 		this.informObjectMotion(object);
 	}
 
+	public UIsoObject[] findObjects(UIsoObject object) {		
+		UIsoObject[] objects;
+		objects = this.scene_objects_manager.findObjects(object.getX(), object.getY());
+
+		return objects;
+	}
+
 	public void informObjectSizeChange(UIsoObject object) {
 		this.removeObject(object);
 		this.insertObject(object);
 	}
 
 	public void informObjectMotion(UIsoObject object) {
+		System.out.println("inform " + object);
 		int nw_x, nw_y, ne_x, ne_y, ws_x, ws_y, es_x, es_y;
 		UIsoObjectsGridCell nw_cell, ne_cell, es_cell, ws_cell;
 
@@ -468,16 +477,21 @@ public class UIsoEngine {
 		this.virtual_coordinates.y = object.getY() + this.tile_max_z * this.virtual_world_tile_size;
 		this.virtual_coordinates.z = object.getZ();
 		toRealCoordinates(this.virtual_coordinates, this.real_coordinates);
-
+		
+		UIsoObject[] objects = findObjects(object);
 		if (object instanceof SpriteObject) {
+			System.out.println("spriteobject");
 			UIsoImage image;
 			Sprite sprite;
 
 			this.drawer.getObjectSprite((SpriteObject) object, this.sprites);
 			sprite = this.sprites[0];
-			if (sprite == null)
+			if (sprite == null){
+			System.out.println("null sprite");
 				return;
+			}
 
+			System.out.println(sprite);
 			image = sprite.image;
 			if (this.debug)
 				this.objects_grid_manager.checkObjectLimits(image.getW(), image.getH());
@@ -781,6 +795,7 @@ public class UIsoEngine {
 		}
 		*/
 	}
+
 
 	public void drawObjects() {
 		int min_x, min_y, max_x, max_y;
