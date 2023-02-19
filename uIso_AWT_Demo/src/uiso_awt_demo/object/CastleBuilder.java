@@ -93,6 +93,10 @@ public class CastleBuilder {
 	private String[] blue_prints;
 	private Map<Character, MyTile> especial_positions = new HashMap<Character, MyTile>();
 
+	public void deleteWall(int x, int y, UIsoEngine uiso_engine){
+		uiso_engine.deleteObject(x,y);
+	}
+
 	public void createWall(int x, int y, WallType wall_type, UIsoEngine uiso_engine) {
 		Wall wall = new Wall();
 		
@@ -142,6 +146,11 @@ public class CastleBuilder {
 				tile.setPassability(false);
 				System.out.println("y");
 			break;
+			case 'D':
+			this.deleteWall(x, y, uiso_engine);
+			tile.setPassability(true);
+			System.out.println("Delete");
+			break;
 			default:
 				if (c != 'O' && Character.isLetter(c)) {
 					this.especial_positions.put(c, tile);
@@ -153,16 +162,13 @@ public class CastleBuilder {
 		if (c != 'O') {
 			TerraformUtils.setAllTileCornersZ(0, uiso_engine, tile);
 			this.adjustTile(x, y, c, uiso_engine, tile);
-			System.out.println("adjust");
 		}
 	}
 
 	private void adjustTile(int x, int y, char c, UIsoEngine uiso_engine, MyTile tile) {
 		if (c == ' ' || c == '+') {
 			tile.setTileType(TileType.CASTLE_FLOOR_FULL);
-			System.out.println("adjust tile 1");
 		} else {
-			System.out.println("adjust tile 2");
 			boolean neighbour_on_ne = this.safeGetChar(x + 1, y) != 'O';
 			boolean neighbour_on_sw = this.safeGetChar(x - 1, y) != 'O';
 			boolean neighbour_on_nw = this.safeGetChar(x, y + 1) != 'O';

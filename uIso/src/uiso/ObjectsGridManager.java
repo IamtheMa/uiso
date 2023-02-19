@@ -193,8 +193,9 @@ class ObjectsGridManager {
 	}
 
 	public UIsoObjectsGridCell getObjectsGridCell(int cell_x, int cell_y) {
-		if (0 <= cell_y && cell_y < this.grid.length && 0 <= cell_x && cell_x < this.grid[cell_y].length)
+		if (0 <= cell_y && cell_y < this.grid.length && 0 <= cell_x && cell_x < this.grid[cell_y].length){
 			return this.grid[cell_y][cell_x];
+		}
 		return null;
 	}
 

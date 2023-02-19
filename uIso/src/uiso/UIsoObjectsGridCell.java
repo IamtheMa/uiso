@@ -37,4 +37,6 @@ class UIsoObjectsGridCell extends LinkedListElement {
 		previous_first_object.setVertexOfPreviousElementThatContinuesTheListInVertex(vertex, aux);
 		object.setVertexOfNextElementThatContinuesTheListInVertex(aux, vertex);
 	}
+	void deleteObject(UIsoObject object, int vertex) {
+	}
 }

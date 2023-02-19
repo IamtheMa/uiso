@@ -236,10 +236,10 @@ class SimulationLogic implements ISimulationLogic {
 					if (SimulationConstants.CASTLE_LAND_AREA.contains(tile_x, tile_y)) {
 						if(left_click){
 							//build wall
-							char c = '+';
+							char c = 'D';
 							MyTile tile = (MyTile) uiso_engine.getTile(tile_x, tile_y);
+							//this.simulation_state.castle_builder.deleteWall(tile_x, tile_y, uiso_engine);
 					this.simulation_state.castle_builder.createWalls(tile_x,tile_y,c,uiso_engine,tile);	
-					//this.simulation_state.castle_builder.build(uiso_engine);
 						}else
 						if (this.tile_under_mouse_pointer.getSlope() == Tile.FLAT && uiso_engine.getTileZ(this.tile_under_mouse_pointer) == 0
 								&& (this.simulation_state.minotaur.getTileX() != tile_x || this.simulation_state.minotaur.getTileY() != tile_y)) {
