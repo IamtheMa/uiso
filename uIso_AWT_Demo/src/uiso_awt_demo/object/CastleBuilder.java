@@ -101,12 +101,12 @@ public class CastleBuilder {
 		Wall wall = new Wall();
 		
 		wall.setX((x) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetX());
-		wall.setY((y) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetY());
+		wall.setY((y) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetY());		
+		System.out.println("x test " + x + " " + (x) * SimulationConstants.TILE_VIRTUAL_SIZE + wall_type.getTilePositionOffsetX());
 		wall.setEnum(wall_type);
 		uiso_engine.insertObject(wall);
-		
 		//wall.createSprites();
-		System.out.println("make wall? " + wall_type + " : " + x + "," + y + " ; " + (x + this.base_x) + "," + (y + this.base_y));
+		System.out.println("make wall? " + wall);
 	}
 
 	public void createWalls(int x, int y, char c, UIsoEngine uiso_engine, MyTile tile) {

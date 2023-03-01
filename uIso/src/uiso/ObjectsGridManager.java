@@ -175,15 +175,21 @@ class ObjectsGridManager {
 		}
 	}
 
+	public Point getNWPoint (int x, int y){
+		if (!(this.nw_point.x <= x && x <= this.es_point.x && this.nw_point.y <= y && y <= this.es_point.y))
+			return null;
+		return this.nw_point;
+	}
 	public UIsoObjectsGridCell getObjectsGridCellAndCellCoordinates(int x, int y, Point coordinates) {
 		int cell_x, cell_y;
 		UIsoObjectsGridCell cell;
 
 		if (!(this.nw_point.x <= x && x <= this.es_point.x && this.nw_point.y <= y && y <= this.es_point.y))
 			return null;
-
 		cell_x = (x - this.nw_point.x) / this.objects_grid_cell_size;
 		cell_y = (y - this.nw_point.y) / this.objects_grid_cell_size;
+		//System.out.println("X cell " + x + " + " + nw_point.x + " " + cell_x);
+		//System.out.println("y cell " + y + " + " + nw_point.y + " " + cell_y);
 		cell = this.getObjectsGridCell(cell_x, cell_y);
 		if (cell != null && coordinates != null) {
 			coordinates.x = cell_x;

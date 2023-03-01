@@ -19,15 +19,19 @@
 
 package uiso;
 
+import java.util.ArrayList;
+
 class UIsoObjectsGridCell extends LinkedListElement {
 	/* Package: */
 	UIsoObject isometric_engine_object;
+	ArrayList<UIsoObject> objects = new ArrayList<UIsoObject>();
 
 	void insertObject(UIsoObject object, int vertex) {
 		UIsoObject previous_first_object = this.isometric_engine_object;
 
 		this.isometric_engine_object = object;
 		object.setValueToVertex(this, previous_first_object, vertex);
+		objects.add(object);
 		if (previous_first_object == null)
 			return;
 
@@ -37,6 +41,22 @@ class UIsoObjectsGridCell extends LinkedListElement {
 		previous_first_object.setVertexOfPreviousElementThatContinuesTheListInVertex(vertex, aux);
 		object.setVertexOfNextElementThatContinuesTheListInVertex(aux, vertex);
 	}
-	void deleteObject(UIsoObject object, int vertex) {
+	public UIsoObject findObject(int x, int y){
+		if(objects.size() <= 0){
+			return null;
+		}
+		System.out.println("objects " + objects.size());
+		for(int i = 0; i < objects.size(); i++){
+			if(objects.get(i).getX() <= (x*16) + 16 && objects.get(i).getX() >= (x*16) - 16
+			&& objects.get(i).getY() <= (y*16) + 15 && objects.get(i).getY() >= (y*16) - 16){
+				System.out.println("example " + i + " " + objects.get(i) + " " + x + "," + y);
+				return objects.get(i);
+			}
+		}
+		return null;
+	}
+	void removeObject(UIsoObject object) {
+		int index = objects.indexOf(object);
+		objects.remove(index);
 	}
 }

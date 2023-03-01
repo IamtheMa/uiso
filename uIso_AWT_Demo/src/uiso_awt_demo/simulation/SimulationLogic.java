@@ -235,6 +235,7 @@ class SimulationLogic implements ISimulationLogic {
 					//} else 
 					if (SimulationConstants.CASTLE_LAND_AREA.contains(tile_x, tile_y)) {
 						if(left_click){
+							System.out.println("tile " + this.tile_under_mouse_pointer + " : " + tile_x + "," + tile_y);
 							//build wall
 							char c = 'D';
 							MyTile tile = (MyTile) uiso_engine.getTile(tile_x, tile_y);

@@ -459,66 +459,23 @@ public class UIsoEngine {
 	public void deleteObject(int x, int y) {		
 		UIsoObject object;
 		UIsoObjectsGridCell objects_grid_cell;
-		System.out.println("delete " + x + "," + y);
-		//objects_grid_cell = this.objects_grid_manager.getObjectsGridCell(x, y);
 		Point find = new Point(x,y);
-		System.out.println("null? " + this.viewport_offset_x + "," + this.viewport_offset_y + "," + find);
-		objects_grid_cell = this.objects_grid_manager.getObjectsGridCellAndCellCoordinates(x, y, find);
-		System.out.println("object " + objects_grid_cell);
-		//objects_grid_cell = this.objects_grid_manager.getObjectsGridCellAndCellCoordinates(this.viewport_offset_x, this.viewport_offset_y, this.point);
+		int offsetx = (this.real_coordinates.x - this.viewport_w_half);
+		int offsety = (this.real_coordinates.y - this.viewport_h_half);
+		Point nw_point = this.objects_grid_manager.getNWPoint(offsetx, offsety);
+		//major jank risk!!! i have no idea why it needs to be minus then divided by 4 to work. very likely to break later
+		offsetx = offsetx - (nw_point.x/4);
+		offsety = offsety + nw_point.y;
+		objects_grid_cell = this.objects_grid_manager.getObjectsGridCellAndCellCoordinates(offsetx, offsety, find);
 		assert (objects_grid_cell != null);
-		int vertex = 0, next_vertex = 0;
 		
 		if (objects_grid_cell != null){
-			object = objects_grid_cell.isometric_engine_object;
-			System.out.println("inform " + object);
-			int nw_x, nw_y, ne_x, ne_y, ws_x, ws_y, es_x, es_y;
-			UIsoObjectsGridCell nw_cell, ne_cell, es_cell, ws_cell;
-	
-			this.virtual_coordinates.x = object.getX() + this.tile_max_z * this.virtual_world_tile_size;
-			this.virtual_coordinates.y = object.getY() + this.tile_max_z * this.virtual_world_tile_size;
-			this.virtual_coordinates.z = object.getZ();
-			toRealCoordinates(this.virtual_coordinates, this.real_coordinates);
-			
-			System.out.println("looking " + object.getX() + "," + object.getY());
-			//deleteObject(this.virtual_coordinates.x,this.virtual_coordinates.y);
-			if (object instanceof SpriteObject) {
-				UIsoImage image;
-				Sprite sprite;
-	
-				this.drawer.getObjectSprite((SpriteObject) object, this.sprites);
-				sprite = this.sprites[0];
-				if (sprite == null){
-				System.out.println("null sprite");
-					return;
-				}
-	
-				System.out.println(sprite);
-				image = sprite.image;
-				if (this.debug)
-					this.objects_grid_manager.checkObjectLimits(image.getW(), image.getH());
-	
-				ws_x = nw_x = this.real_coordinates.x - sprite.getAnchorX();
-				ne_y = nw_y = this.real_coordinates.y - sprite.getAnchorY();
-				ne_x = es_x = nw_x + image.getW();
-				ws_y = es_y = nw_y + image.getH();
-			} else {
-				StringObject string_object = (StringObject) object;
-				this.drawer.getStringBounds(string_object.getString(), this.string_bounds, string_object.getFont());
-				if (this.debug)
-					this.objects_grid_manager.checkObjectLimits(this.string_bounds.w, this.string_bounds.h);
-	
-				ws_x = nw_x = this.real_coordinates.x - (this.string_bounds.w >> 1);
-				ne_y = nw_y = this.real_coordinates.y - (this.string_bounds.h >> 1);
-				ne_x = es_x = nw_x + this.string_bounds.w;
-				ws_y = es_y = nw_y + this.string_bounds.h;
+			object = objects_grid_cell.findObject(x,y);
+			if(object == null){
+				return;
 			}
-	
-			nw_cell = this.objects_grid_manager.getObjectsGridCellAndCellCoordinates(nw_x, nw_y, null);
-			ne_cell = this.objects_grid_manager.getObjectsGridCellAndCellCoordinates(ne_x, ne_y, null);
-			ws_cell = this.objects_grid_manager.getObjectsGridCellAndCellCoordinates(ws_x, ws_y, null);
-			es_cell = this.objects_grid_manager.getObjectsGridCellAndCellCoordinates(es_x, es_y, null);
-	
+
+			objects_grid_cell.removeObject(object);
 			object.removeObjectFromLinkedList(UIsoObject.NW_VERTEX);
 			object.removeObjectFromLinkedList(UIsoObject.NE_VERTEX);
 			object.removeObjectFromLinkedList(UIsoObject.WS_VERTEX);
